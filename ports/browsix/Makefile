@@ -44,14 +44,14 @@ OBJ = $(PY_O)
 OBJ += $(addprefix $(BUILD)/, $(SRC_LIB:.c=.o))
 OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
 
-JSFLAGS = -O0 -s WASM=0 -s EXPORTED_FUNCTIONS="['_mp_js_init', '_mp_js_init_repl', '_mp_js_do_str', '_mp_js_process_char', '_mp_hal_get_interrupt_char', '_mp_keyboard_interrupt']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']" -s "BINARYEN_TRAP_MODE='clamp'" --memory-init-file 0 --js-library library.js
+JSFLAGS = -O0 -s WASM=0 -s EXPORTED_FUNCTIONS="['_mp_js_init', '_mp_js_init_repl', '_mp_js_do_str', '_mp_js_process_char', '_mp_hal_get_interrupt_char', '_mp_keyboard_interrupt']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']"
 
 all: $(BUILD)/micropython.js
 
 $(BUILD)/micropython.js: $(OBJ) library.js wrapper.js
 	$(ECHO) "LINK $(BUILD)/firmware.js"
 	$(Q)emcc $(LDFLAGS) -o $(BUILD)/firmware.js $(OBJ) $(JSFLAGS)
-	cat wrapper.js $(BUILD)/firmware.js > $@
+	cat $(BUILD)/firmware.js > $@
 
 min: $(BUILD)/micropython.js
 	uglifyjs $< -c -o $(BUILD)/micropython.min.js
