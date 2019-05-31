@@ -170,15 +170,6 @@ extern const struct _mp_obj_module_t mp_module_utime;
 #define MICROPY_THREAD_YIELD()
 #endif
 
-#define MICROPY_VM_HOOK_COUNT (10)
-#define MICROPY_VM_HOOK_INIT static uint vm_hook_divisor = MICROPY_VM_HOOK_COUNT;
-#define MICROPY_VM_HOOK_POLL if (--vm_hook_divisor == 0) { \
-        vm_hook_divisor = MICROPY_VM_HOOK_COUNT; \
-        extern void mp_js_hook(void); \
-        mp_js_hook(); \
-    }
-#define MICROPY_VM_HOOK_LOOP MICROPY_VM_HOOK_POLL
-#define MICROPY_VM_HOOK_RETURN MICROPY_VM_HOOK_POLL
 
 // type definitions for the specific machine
 

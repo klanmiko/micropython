@@ -37,8 +37,6 @@
 #include "py/mperrno.h"
 #include "lib/utils/pyexec.h"
 
-#include "library.h"
-
 #if MICROPY_ENABLE_COMPILER
 int do_str(const char *src, mp_parse_input_kind_t input_kind) {
     int ret = 0;
