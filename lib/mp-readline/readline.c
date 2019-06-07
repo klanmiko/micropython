@@ -148,8 +148,7 @@ int readline_process_char(int c) {
             redraw_step_back = rl.cursor_pos - rl.orig_line_len;
             redraw_from_cursor = true;
         #endif
-        } else if (c == '\r') {
-            // newline
+        } else if(c == '\n') {
             mp_hal_stdout_tx_str("\r\n");
             readline_push_history(vstr_null_terminated_str(rl.line) + rl.orig_line_len);
             return 0;
