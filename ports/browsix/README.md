@@ -36,6 +36,7 @@ To generate the minified file micropython.min.js, run:
 
     $ make min
 
+To install micropython in browsix, copy build/micropython.js into the fs/ folder in the main browsix project folder, then run gulp serve which will add the new file into the index.
 
 Testing
 -------
